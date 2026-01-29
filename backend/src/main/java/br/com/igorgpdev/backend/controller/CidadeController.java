@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.igorgpdev.backend.entity.Cidade;
 import br.com.igorgpdev.backend.service.CidadeService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/cidades")
@@ -29,12 +30,12 @@ public class CidadeController {
     }
 
     @PostMapping("/")
-    public Cidade insert(@RequestBody Cidade cidade) {
+    public Cidade insert(@Valid @RequestBody Cidade cidade) {
         return cidadeService.insert(cidade);
     }
 
     @PutMapping("/")
-    public Cidade change(@RequestBody Cidade cidade) {
+    public Cidade change(@Valid @RequestBody Cidade cidade) {
         return cidadeService.change(cidade);
     }
 

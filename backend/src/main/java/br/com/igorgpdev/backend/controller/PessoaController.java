@@ -13,35 +13,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.igorgpdev.backend.entity.Estado;
-import br.com.igorgpdev.backend.service.EstadoService;
+import br.com.igorgpdev.backend.entity.Pessoa;
+import br.com.igorgpdev.backend.service.PessoaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/estados")
-public class EstadoController {
+@RequestMapping("/api/pessoas")
+public class PessoaController {
 
     @Autowired
-    private EstadoService estadoService;
+    private PessoaService pessoaService;
 
     @GetMapping("/")
-    public List<Estado> findAll() {
-        return estadoService.findAll();
+    public List<Pessoa> findAll() {
+        return pessoaService.findAll();
     }
 
     @PostMapping("/")
-    public Estado insert(@Valid @RequestBody Estado estado) {
-        return estadoService.insert(estado);
+    public Pessoa insert(@Valid @RequestBody Pessoa pessoa) {
+        return pessoaService.insert(pessoa);
     }
 
     @PutMapping("/")
-    public Estado change(@Valid @RequestBody Estado estado) {
-        return estadoService.change(estado);
+    public Pessoa change(@Valid @RequestBody Pessoa pessoa) {
+        return pessoaService.change(pessoa);
+    }
+
+    @PutMapping("/{id}")
+    public Pessoa changeById(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa) {
+        pessoa.setId(id);
+        return pessoaService.change(pessoa);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        estadoService.delete(id);
+        pessoaService.delete(id);
         return ResponseEntity.ok().build();
     }
 
