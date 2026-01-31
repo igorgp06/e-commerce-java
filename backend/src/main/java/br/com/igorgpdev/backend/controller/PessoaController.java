@@ -34,15 +34,10 @@ public class PessoaController {
         return pessoaService.insert(pessoa);
     }
 
-    @PutMapping("/")
-    public Pessoa change(@Valid @RequestBody Pessoa pessoa) {
-        return pessoaService.change(pessoa);
-    }
-
     @PutMapping("/{id}")
     public Pessoa changeById(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa) {
         pessoa.setId(id);
-        return pessoaService.change(pessoa);
+        return pessoaService.changeById(id, pessoa);
     }
 
     @DeleteMapping("/{id}")

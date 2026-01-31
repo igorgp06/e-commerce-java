@@ -25,9 +25,14 @@ public class EstadoService {
         return novoEstado;
     }
 
-    public Estado change(Estado estado) {
-        estado.setDataAtualizacao(new Date());
-        return estadoRepository.saveAndFlush(estado);
+    public Estado changeById(Long id, Estado estado) {
+        Estado estadoExistente = estadoRepository.findById(id).orElseThrow();
+
+        estadoExistente.setNome(estado.getNome());
+        estadoExistente.setSigla(estado.getSigla());
+        estadoExistente.setDataAtualizacao(new Date());
+
+        return estadoRepository.saveAndFlush(estadoExistente);
     }
 
     public void delete(Long id) {

@@ -34,18 +34,18 @@ public class PessoaService {
         return novaPessoa;
     }
 
-    public Pessoa change(Pessoa pessoa) {
+    public Pessoa changeById(Long id, Pessoa pessoa) {
 
-        Pessoa pessoaAtual = pessoaRepository.findById(pessoa.getId()).orElseThrow();
+        Pessoa pessoaAtual = pessoaRepository.findById(id).orElseThrow();
 
         if (pessoa.getCpf() != null && !pessoa.getCpf().equals(pessoaAtual.getCpf())) {
-            if (pessoaRepository.existsByCpfAndIdNot(pessoa.getCpf(), pessoa.getId())) {
+            if (pessoaRepository.existsByCpfAndIdNot(pessoa.getCpf(), id)) {
                 throw new RuntimeException("CPF já cadastrado");
             }
         }
 
         if (pessoa.getEmail() != null && !pessoa.getEmail().equals(pessoaAtual.getEmail())) {
-            if (pessoaRepository.existsByEmailAndIdNot(pessoa.getEmail(), pessoa.getId())) {
+            if (pessoaRepository.existsByEmailAndIdNot(pessoa.getEmail(), id)) {
                 throw new RuntimeException("Email já cadastrado.");
             }
         }

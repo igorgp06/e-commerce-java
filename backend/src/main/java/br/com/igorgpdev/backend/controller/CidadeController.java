@@ -36,7 +36,7 @@ public class CidadeController {
 
     @PutMapping("/{id}")
     public Cidade change(@PathVariable("id") Long id, @Valid @RequestBody Cidade cidade) {
-        return cidadeService.change(cidade);
+        return cidadeService.changeById(id, cidade);
     }
 
     @DeleteMapping("/{id}")

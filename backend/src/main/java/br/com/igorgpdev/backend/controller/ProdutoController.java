@@ -38,9 +38,9 @@ public class ProdutoController {
         return produtoService.insert(produto);
     }
 
-    @PutMapping("/{id}") // TODO: descobrir pq quando altero pelo id ele cria um novo objeto no banco ao inves de alterar o existente
+    @PutMapping("/{id}")
     public Produto change(@PathVariable("id") Long id, @RequestBody Produto produto) {
-        return produtoService.change(produto);
+        return produtoService.changeById(id, produto);
     }
 
     @DeleteMapping("/{id}")

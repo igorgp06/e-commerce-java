@@ -36,7 +36,7 @@ public class EstadoController {
 
     @PutMapping("/{id}")
     public Estado change(@PathVariable("id") Long id, @Valid @RequestBody Estado estado) {
-        return estadoService.change(estado);
+        return estadoService.changeById(id, estado);
     }
 
     @DeleteMapping("/{id}")
@@ -44,5 +44,4 @@ public class EstadoController {
         estadoService.delete(id);
         return ResponseEntity.ok().build();
     }
-
 }

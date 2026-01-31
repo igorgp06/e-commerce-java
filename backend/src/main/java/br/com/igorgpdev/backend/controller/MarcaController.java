@@ -35,7 +35,7 @@ public class MarcaController {
 
     @PutMapping("/{id}")
     public Marca change(@PathVariable("id") Long id, @RequestBody Marca marca) {
-        return marcaService.change(marca);
+        return marcaService.changeById(id, marca);
     }
 
     @DeleteMapping("/{id}")

@@ -30,9 +30,19 @@ public class ProdutoService {
         return produtoNovo;
     }
 
-    public Produto change(Produto produto) {
-        produto.setDataAtualizacao(new Date());
-        return produtoRepository.saveAndFlush(produto);
+    public Produto changeById(Long id, Produto produto) {
+        Produto produtoExistente = produtoRepository.findById(id).get();
+
+        produtoExistente.setNome(produto.getNome());
+        produtoExistente.setDescricaoCurta(produto.getDescricaoCurta());
+        produtoExistente.setDescricaoLonga(produto.getDescricaoLonga());
+        produtoExistente.setPrecoCusto(produto.getPrecoCusto());
+        produtoExistente.setPrecoVenda(produto.getPrecoVenda());
+        produtoExistente.setMarca(produto.getMarca());
+        produtoExistente.setCategoria(produto.getCategoria());
+        produtoExistente.setDataAtualizacao(new Date());
+        
+        return produtoRepository.saveAndFlush(produtoExistente);
     }
 
     public void delete(Long id) {

@@ -25,13 +25,17 @@ public class MarcaService {
         return marcaNova;
     }
 
-    public Marca change(Marca marca) {
-        marca.setDataAtualizacao(new Date());
-        return marcaRepository.saveAndFlush(marca);
+    public Marca changeById(Long id, Marca marca) {
+        Marca marcaExistente = marcaRepository.findById(id).orElseThrow();
+
+        marcaExistente.setNome(marca.getNome());
+        marcaExistente.setDataAtualizacao(new Date());
+
+        return marcaRepository.saveAndFlush(marcaExistente);
     }
 
     public void delete(Long id) {
-        Marca marca = marcaRepository.findById(id).get();
+        Marca marca = marcaRepository.findById(id).orElseThrow();
         marcaRepository.delete(marca);
     }
 }

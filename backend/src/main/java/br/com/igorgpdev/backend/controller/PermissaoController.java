@@ -35,7 +35,7 @@ public class PermissaoController {
 
     @PutMapping("/{id}")
     public Permissao change(@PathVariable("id") Long id, @RequestBody Permissao permissao) {
-        return permissaoService.change(permissao);
+        return permissaoService.changeById(id, permissao);
     }
 
     @DeleteMapping("/{id}")

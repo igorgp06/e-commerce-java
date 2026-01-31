@@ -25,9 +25,14 @@ public class CidadeService {
         return novaCidade;
     }
 
-    public Cidade change(Cidade cidade) {
-        cidade.setDataAtualizacao(new Date());
-        return cidadeRepository.saveAndFlush(cidade);
+    public Cidade changeById(Long id, Cidade cidade) {
+        Cidade cidadeExistente = cidadeRepository.findById(id).orElseThrow();
+
+        cidadeExistente.setNome(cidade.getNome());
+        cidadeExistente.setEstado(cidade.getEstado());
+        cidadeExistente.setDataAtualizacao(new Date());
+
+        return cidadeRepository.saveAndFlush(cidadeExistente);
     }
 
     public void delete(Long id) {

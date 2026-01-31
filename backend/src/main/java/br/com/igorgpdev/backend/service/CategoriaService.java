@@ -25,9 +25,13 @@ public class CategoriaService {
         return categoriaSalva;
     }
 
-    public Categoria change(Categoria categoria) {
-        categoria.setDataAtualizacao(new Date());
-        return categoriaRepository.saveAndFlush(categoria);
+    public Categoria changeById(Long id, Categoria categoria) {
+        Categoria categoriaExistente = categoriaRepository.findById(id).orElseThrow();
+
+        categoriaExistente.setNome(categoria.getNome());
+        categoriaExistente.setDataAtualizacao(new Date());
+
+        return categoriaRepository.saveAndFlush(categoriaExistente);
     }
 
     public void delete(Long id) {

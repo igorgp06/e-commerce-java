@@ -23,7 +23,7 @@ public class Marca {
 
     @NotBlank
     @Column(nullable = false)
-    @Size(min = 5, max = 80)
+    @Size(max = 80)
     private String nome;
 
     private Date dataCriacao;

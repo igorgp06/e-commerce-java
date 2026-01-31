@@ -25,13 +25,17 @@ public class PermissaoService {
         return permissaoNova;
     }
 
-    public Permissao change(Permissao permissao) {
-        permissao.setDataAtualizacao(new Date());
-        return  permissaoRepository.saveAndFlush(permissao);
+    public Permissao changeById(Long id, Permissao permissao) {
+        Permissao permissaoExistente = permissaoRepository.findById(id).orElseThrow();
+
+        permissaoExistente.setNome(permissao.getNome());
+        permissaoExistente.setDataAtualizacao(new Date());
+        
+        return  permissaoRepository.saveAndFlush(permissaoExistente);
     }
 
     public void delete(Long id) {
-        Permissao permissao = permissaoRepository.findById(id).get();
+        Permissao permissao = permissaoRepository.findById(id).orElseThrow();
         permissaoRepository.delete(permissao);
     }
 }
