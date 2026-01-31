@@ -34,8 +34,8 @@ public class EstadoController {
         return estadoService.insert(estado);
     }
 
-    @PutMapping("/")
-    public Estado change(@Valid @RequestBody Estado estado) {
+    @PutMapping("/{id}")
+    public Estado change(@PathVariable("id") Long id, @Valid @RequestBody Estado estado) {
         return estadoService.change(estado);
     }
 

@@ -13,35 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.igorgpdev.backend.entity.Cidade;
-import br.com.igorgpdev.backend.service.CidadeService;
-import jakarta.validation.Valid;
+import br.com.igorgpdev.backend.entity.Permissao;
+import br.com.igorgpdev.backend.service.PermissaoService;
 
 @RestController
-@RequestMapping("/api/cidades")
-public class CidadeController {
+@RequestMapping("/api/permissoes")
+public class PermissaoController {
 
     @Autowired
-    private CidadeService cidadeService;
+    private PermissaoService permissaoService;
 
     @GetMapping("/")
-    public List<Cidade> findAll() {
-        return cidadeService.findAll();
+    public List<Permissao> findAll() {
+        return permissaoService.findAll();
     }
 
     @PostMapping("/")
-    public Cidade insert(@Valid @RequestBody Cidade cidade) {
-        return cidadeService.insert(cidade);
+    public Permissao insert(@RequestBody Permissao permissao) {
+        return permissaoService.insert(permissao);
     }
 
     @PutMapping("/{id}")
-    public Cidade change(@PathVariable("id") Long id, @Valid @RequestBody Cidade cidade) {
-        return cidadeService.change(cidade);
+    public Permissao change(@PathVariable("id") Long id, @RequestBody Permissao permissao) {
+        return permissaoService.change(permissao);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        cidadeService.delete(id);
+        permissaoService.delete(id);
         return ResponseEntity.ok().build();
     }
 }

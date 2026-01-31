@@ -7,18 +7,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
-@Table(name = "cidade")
+@Table(name = "marca")
 @Data
-public class Cidade {
+public class Marca {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +23,10 @@ public class Cidade {
 
     @NotBlank
     @Column(nullable = false)
-    @Size(min = 3, max = 60)
+    @Size(min = 5, max = 80)
     private String nome;
-
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "id_estado", nullable = false)
-    private Estado estado;
 
     private Date dataCriacao;
     private Date dataAtualizacao;
+
 }

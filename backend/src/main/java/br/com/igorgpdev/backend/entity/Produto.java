@@ -2,8 +2,6 @@ package br.com.igorgpdev.backend.entity;
 
 import java.util.Date;
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,51 +10,43 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
-@Table(name = "pessoa")
+@Table(name = "produto")
 @Data
-public class Pessoa {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Size(min = 3, max = 120)
     @Column(nullable = false)
+    @Size(min = 5, max = 80)
     private String nome;
 
-    @NotBlank
-    @CPF
-    @Column(nullable = false, unique = true, length = 11)
-    private String cpf;
+    @Size(max = 200)
+    private String descricaoCurta;
 
-    @NotBlank
-    @Email
-    @Column(nullable = false, unique = true)
-    private String email;
+    @Size(max = 1000)
+    private String descricaoLonga;
 
-    @NotBlank
-    @Size(min = 6)
-    @Column(nullable = false)
-    private String senha;
+    private Double precoCusto;
 
     @NotBlank
     @Column(nullable = false)
-    private String endereco;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String cep;
+    private Double precoVenda;
 
     @ManyToOne
-    @JoinColumn(name = "id_cidade")
-    private Cidade cidade;
+    @JoinColumn(name = "id_marca")
+    private Marca marca;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
 
     private Date dataCriacao;
     private Date dataAtualizacao;

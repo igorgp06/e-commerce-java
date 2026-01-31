@@ -13,35 +13,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.igorgpdev.backend.entity.Cidade;
-import br.com.igorgpdev.backend.service.CidadeService;
-import jakarta.validation.Valid;
+import br.com.igorgpdev.backend.entity.Categoria;
+import br.com.igorgpdev.backend.service.CategoriaService;
+
 
 @RestController
-@RequestMapping("/api/cidades")
-public class CidadeController {
+@RequestMapping("/api/categorias")
+public class CategoriaController {
 
     @Autowired
-    private CidadeService cidadeService;
+    private CategoriaService categoriaService;
 
     @GetMapping("/")
-    public List<Cidade> findAll() {
-        return cidadeService.findAll();
+    public List<Categoria> findAll() {
+        return categoriaService.findAll();
     }
 
-    @PostMapping("/")
-    public Cidade insert(@Valid @RequestBody Cidade cidade) {
-        return cidadeService.insert(cidade);
+    @PostMapping
+    public Categoria insert(@RequestBody Categoria categoria) {
+        return categoriaService.insert(categoria);
     }
 
     @PutMapping("/{id}")
-    public Cidade change(@PathVariable("id") Long id, @Valid @RequestBody Cidade cidade) {
-        return cidadeService.change(cidade);
+    public Categoria change(@PathVariable("id") Long id, @RequestBody Categoria categoria) {
+        return categoriaService.change(categoria);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        cidadeService.delete(id);
+        categoriaService.delete(id);
         return ResponseEntity.ok().build();
     }
 }

@@ -13,35 +13,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.igorgpdev.backend.entity.Cidade;
-import br.com.igorgpdev.backend.service.CidadeService;
-import jakarta.validation.Valid;
+import br.com.igorgpdev.backend.entity.Produto;
+import br.com.igorgpdev.backend.service.ProdutoService;
 
 @RestController
-@RequestMapping("/api/cidades")
-public class CidadeController {
+@RequestMapping("/api/produtos")
+public class ProdutoController {
 
     @Autowired
-    private CidadeService cidadeService;
+    private ProdutoService produtoService;
 
     @GetMapping("/")
-    public List<Cidade> findAll() {
-        return cidadeService.findAll();
+    public List<Produto> findAll() {
+        return produtoService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Produto findById(@PathVariable("id") Long id) { 
+        return produtoService.findById(id);
     }
 
     @PostMapping("/")
-    public Cidade insert(@Valid @RequestBody Cidade cidade) {
-        return cidadeService.insert(cidade);
+    public Produto insert(@RequestBody Produto produto) {
+        return produtoService.insert(produto);
     }
 
-    @PutMapping("/{id}")
-    public Cidade change(@PathVariable("id") Long id, @Valid @RequestBody Cidade cidade) {
-        return cidadeService.change(cidade);
+    @PutMapping("/{id}") // TODO: descobrir pq quando altero pelo id ele cria um novo objeto no banco ao inves de alterar o existente
+    public Produto change(@PathVariable("id") Long id, @RequestBody Produto produto) {
+        return produtoService.change(produto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        cidadeService.delete(id);
+        produtoService.delete(id);
         return ResponseEntity.ok().build();
     }
 }

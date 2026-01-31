@@ -50,5 +50,4 @@ public class PessoaController {
         pessoaService.delete(id);
         return ResponseEntity.ok().build();
     }
-
 }

@@ -13,35 +13,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.igorgpdev.backend.entity.Cidade;
-import br.com.igorgpdev.backend.service.CidadeService;
-import jakarta.validation.Valid;
+import br.com.igorgpdev.backend.entity.Marca;
+import br.com.igorgpdev.backend.service.MarcaService;
 
 @RestController
-@RequestMapping("/api/cidades")
-public class CidadeController {
+@RequestMapping("/api/marcas")
+public class MarcaController {
 
     @Autowired
-    private CidadeService cidadeService;
+    private MarcaService marcaService;
 
     @GetMapping("/")
-    public List<Cidade> findAll() {
-        return cidadeService.findAll();
+    public List<Marca> findAll() {
+        return marcaService.findAll();
     }
 
     @PostMapping("/")
-    public Cidade insert(@Valid @RequestBody Cidade cidade) {
-        return cidadeService.insert(cidade);
+    public Marca insert(@RequestBody Marca marca) {
+        return marcaService.insert(marca);
     }
 
     @PutMapping("/{id}")
-    public Cidade change(@PathVariable("id") Long id, @Valid @RequestBody Cidade cidade) {
-        return cidadeService.change(cidade);
+    public Marca change(@PathVariable("id") Long id, @RequestBody Marca marca) {
+        return marcaService.change(marca);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        cidadeService.delete(id);
+        marcaService.delete(id);
         return ResponseEntity.ok().build();
     }
+
 }
