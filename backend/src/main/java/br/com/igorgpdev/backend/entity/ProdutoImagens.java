@@ -11,13 +11,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
-@Table(name = "produto")
+@Table(name = "produto_imagens")
 @Data
-public class Produto {
+public class ProdutoImagens {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,28 +26,13 @@ public class Produto {
 
     @NotBlank
     @Column(nullable = false)
-    @Size(min = 5, max = 80)
+    @Size(min = 5, max = 60)
     private String nome;
 
-    @Size(max = 150)
-    private String descricaoCurta;
-
-    @Size(max = 1000)
-    private String descricaoLonga;
-
-    private Double precoCusto;
-
-    @NotBlank
-    @Column(nullable = false)
-    private Double precoVenda;
-
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "id_marca")
-    private Marca marca;
-
-    @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
+    @JoinColumn(name = "id_produto", nullable = false)
+    private Produto produto;
 
     private Date dataCriacao;
     private Date dataAtualizacao;

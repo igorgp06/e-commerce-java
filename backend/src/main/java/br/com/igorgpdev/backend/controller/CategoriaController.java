@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.igorgpdev.backend.entity.Categoria;
 import br.com.igorgpdev.backend.service.CategoriaService;
 
-
 @RestController
 @RequestMapping("/api/categorias")
 public class CategoriaController {
@@ -29,7 +28,7 @@ public class CategoriaController {
         return categoriaService.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/")
     public Categoria insert(@RequestBody Categoria categoria) {
         return categoriaService.insert(categoria);
     }
