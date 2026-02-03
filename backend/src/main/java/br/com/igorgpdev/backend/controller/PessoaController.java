@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/pessoas")
-public class PessoaController {
+public class PessoaController { // TODO fazer com que seja possivel alterar campos separadamente sem precisar enviar todos os campos
 
     @Autowired
     private PessoaService pessoaService;
