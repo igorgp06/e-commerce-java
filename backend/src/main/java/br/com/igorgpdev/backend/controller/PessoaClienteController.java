@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.igorgpdev.backend.dto.PessoaClienteRequestDTO;
 import br.com.igorgpdev.backend.entity.Pessoa;
-import br.com.igorgpdev.backend.service.PessoaService;
+import br.com.igorgpdev.backend.service.PessoaClienteService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -16,11 +16,10 @@ import jakarta.validation.Valid;
 public class PessoaClienteController {
 
     @Autowired
-    private PessoaService pessoaService;
+    private PessoaClienteService pessoaClienteService;
 
     @PostMapping("/")
-    public Pessoa insert(@Valid @RequestBody PessoaClienteRequestDTO pessoaDTO) {
-        Pessoa pessoa = new PessoaClienteRequestDTO().converter(pessoaDTO);
-        return pessoaService.insert(pessoa);
+    public Pessoa register(@Valid @RequestBody PessoaClienteRequestDTO pessoaDTO) {
+        return pessoaClienteService.register(pessoaDTO);
     }
 }
