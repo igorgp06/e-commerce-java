@@ -18,6 +18,9 @@ public class PessoaClienteService {
     @Autowired
     private PermissaoPessoaService permissaoPessoaService;
 
+    @Autowired
+    private EmailService emailService;
+
     public Pessoa register(PessoaClienteRequestDTO pessoaDTO) {
 
         Pessoa pessoa = new PessoaClienteRequestDTO().converter(pessoaDTO);
@@ -30,11 +33,27 @@ public class PessoaClienteService {
             throw new IllegalArgumentException("Email ja cadastrado no sistema.");
         }
 
+        String senhaGerada = gerarSenhaTemp(10);
+        pessoa.setSenha(senhaGerada);
+
         pessoa.setDataCriacao(new Date());
 
         Pessoa novaPessoa = pessoaClienteRepository.saveAndFlush(pessoa);
 
         permissaoPessoaService.vincularPermissaoPessoaCliente(novaPessoa);
+
+        emailService.enviarEmailTexto(novaPessoa.getEmail(), "Cadastro realizado com sucesso",
+                "Seja bem vindo(a) a nossa loja, " + novaPessoa.getNome() + "! Em breve você receberá a senha de acesso por email.");
+
         return novaPessoa;
+    }
+
+    private String gerarSenhaTemp(int tamanho) {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!";
+        StringBuilder sb = new StringBuilder();
+
+        java.util.Random r = new java.util.Random();
+        for (int i = 0; i < tamanho; i++) sb.append(chars.charAt(r.nextInt(chars.length())));
+        return sb.toString();
     }
 }

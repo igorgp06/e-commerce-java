@@ -1,0 +1,6 @@
+{"properties": [{
+  "name": "app.email.from",
+  "type": "java.lang.String",
+  "description": "The email address used as the sender in outgoing emails.",
+  "defaultValue": ""
+}]}
