@@ -46,6 +46,10 @@ public class Pessoa {
     @Column(nullable = false, unique = true)
     private String email;
 
+    private String codigoRecSenha;
+
+    private Date dataEnvioCodigo;
+
     @NotBlank
     @Size(min = 6)
     @Column(nullable = false)
@@ -63,7 +67,7 @@ public class Pessoa {
     @JoinColumn(name = "id_cidade")
     private Cidade cidade;
 
-    @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.PERSIST,  CascadeType.MERGE})
+    @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @Setter(value = AccessLevel.NONE)
     private List<PermissaoPessoa> permissoes;
 
@@ -71,7 +75,7 @@ public class Pessoa {
     private Date dataAtualizacao;
 
     public void setPermissoes(List<PermissaoPessoa> pps) {
-        for(PermissaoPessoa pp:pps) {
+        for (PermissaoPessoa pp : pps) {
             pp.setPessoa(this);
         }
         this.permissoes = pps;

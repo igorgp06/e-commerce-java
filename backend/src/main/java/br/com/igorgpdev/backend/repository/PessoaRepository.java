@@ -11,4 +11,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
     
     boolean existsByCpfAndIdNot(String cpf, Long id);
     boolean existsByEmailAndIdNot(String email, Long id);
+
+    Pessoa findByEmail(String email);
 }
