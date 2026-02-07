@@ -1,6 +1,8 @@
 package br.com.igorgpdev.backend.service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,8 +44,10 @@ public class PessoaClienteService {
 
         permissaoPessoaService.vincularPermissaoPessoaCliente(novaPessoa);
 
-        emailService.enviarEmailTexto(novaPessoa.getEmail(), "Cadastro realizado com sucesso",
-                "Seja bem vindo(a) a nossa loja, " + novaPessoa.getNome() + "! Em breve você receberá a senha de acesso por email.");
+        Map<String, Object> propriedades = new HashMap<>();
+        propriedades.put("nome", novaPessoa.getNome());
+        propriedades.put("message", "O cadastro foi realizado com sucesso. Por favor, solicite a alteração da senha temporária.");
+        emailService.enviarEmailTemplate(novaPessoa.getEmail(), "Cadastro realizado com sucesso.", propriedades);
 
         return novaPessoa;
     }
