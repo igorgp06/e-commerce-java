@@ -37,7 +37,6 @@ public class PessoaClienteService {
 
         String senhaGerada = gerarSenhaTemp(10);
         pessoa.setSenha(senhaGerada);
-
         pessoa.setDataCriacao(new Date());
 
         Pessoa novaPessoa = pessoaClienteRepository.saveAndFlush(pessoa);
