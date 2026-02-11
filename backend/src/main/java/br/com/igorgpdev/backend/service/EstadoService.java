@@ -19,6 +19,10 @@ public class EstadoService {
         return estadoRepository.findAll();
     }
 
+    public Estado findById(Long id) {
+        return estadoRepository.findById(id).orElseThrow();
+    }
+
     public Estado insert(Estado estado) {
         estado.setDataCriacao(new Date());
         Estado novoEstado = estadoRepository.saveAndFlush(estado);

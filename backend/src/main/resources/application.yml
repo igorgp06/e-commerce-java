@@ -28,3 +28,11 @@ spring:
 app:
     email:
         from: ${EMAIL_FROM}
+    security:
+        cors:
+            allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+        admin:
+            username: ${ADMIN_USERNAME}
+            password: ${ADMIN_PASSWORD}
+            token-secret: ${ADMIN_TOKEN_SECRET}
+            token-expiration-seconds: ${ADMIN_TOKEN_EXPIRATION_SECONDS}

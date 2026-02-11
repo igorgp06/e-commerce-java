@@ -29,6 +29,11 @@ public class EstadoController {
         return estadoService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Estado findById(@PathVariable("id") Long id) {
+        return estadoService.findById(id);
+    }
+
     @PostMapping("/")
     public Estado insert(@Valid @RequestBody Estado estado) {
         return estadoService.insert(estado);
