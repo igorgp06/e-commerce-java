@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { apiRequestWithAdminToken } from "../../../lib/api";
+import { apiRequestWithAdminToken } from "../../../../lib/api";
 
 const INITIAL_FORM = { nome: "", sigla: "" };
 
@@ -95,39 +95,42 @@ export const EstadosPage = () => {
     };
 
     return (
-        <div className="p-6 space-y-6">
-            <h1 className="text-2xl font-bold">Estados</h1>
+        <div className="relative min-h-screen flex flex-col align-center justify-center px-4">
+            <div className="container max-w-5xl mx-auto text-center">
 
-            <div className="card bg-base-100 shadow">
-                <div className="card-body">
-                    <h2 className="card-title">{editingId ? "Editar estado" : "Novo estado"}</h2>
-                    <form className="grid md:grid-cols-3 gap-3" onSubmit={handleSubmit}>
-                        <input
-                            className="input input-bordered md:col-span-2"
-                            placeholder="Nome do estado"
-                            value={formData.nome}
-                            onChange={(event) => setFormData((prev) => ({ ...prev, nome: event.target.value }))}
-                            required
-                        />
-                        <input
-                            className="input input-bordered"
-                            placeholder="Sigla"
-                            value={formData.sigla}
-                            onChange={(event) => setFormData((prev) => ({ ...prev, sigla: event.target.value }))}
-                            maxLength={2}
-                            required
-                        />
-                        <div className="md:col-span-3 flex gap-2">
-                            <button className="btn btn-primary" type="submit">
-                                {editingId ? "Salvar alterações" : "Cadastrar"}
-                            </button>
-                            {editingId && (
-                                <button className="btn btn-ghost" type="button" onClick={resetForm}>
-                                    Cancelar edição
+                <h1 className="text-2xl font-bold">Estados</h1>
+                <div className="card bg-base-100 shadow">
+                    <div className="card-body">
+                        <h2 className="card-title">{editingId ? "Editar estado" : "Novo estado"}</h2>
+                        <form className="grid md:grid-cols-3 gap-3" onSubmit={handleSubmit}>
+                            <input
+                                className="input input-bordered md:col-span-2"
+                                placeholder="Nome do estado"
+                                value={formData.nome}
+                                onChange={(event) => setFormData((prev) => ({ ...prev, nome: event.target.value }))}
+                                required
+                            />
+                            <input
+                                className="input input-bordered"
+                                placeholder="Sigla"
+                                value={formData.sigla}
+                                onChange={(event) => setFormData((prev) => ({ ...prev, sigla: event.target.value }))}
+                                maxLength={2}
+                                required
+                            />
+                            <div className="md:col-span-3 flex gap-2">
+                                <button className="btn btn-primary" type="submit">
+                                    {editingId ? "Salvar alterações" : "Cadastrar"}
                                 </button>
-                            )}
-                        </div>
-                    </form>
+                                {editingId && (
+                                    <button className="btn btn-ghost" type="button" onClick={resetForm}>
+                                        Cancelar edição
+                                    </button>
+                                )}
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
 

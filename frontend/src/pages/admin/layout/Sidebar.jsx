@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom"
+import { EstadosPage } from "../partials/estados/EstadosPages";
 
 
 export const Sidebar = () => {
@@ -54,6 +55,7 @@ export const Sidebar = () => {
                                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                                 data-tip="Página Inicial"
                             >
+                                <img src="../../../static/images/svgs/home.svg" alt="Home" className="w-4 h-4" />
                                 <span className="is-drawer-close:hidden">Dashboard</span>
                             </NavLink>
                         </li>
@@ -64,9 +66,10 @@ export const Sidebar = () => {
                                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                                 data-tip="Estados"
                             >
+                                <img src="../../../static/images/svgs/brasil.svg" alt="Brasil" className="w-4 h-4" />
                                 <span className="is-drawer-close:hidden">Estados</span>
-                            </NavLink>
-                        </li>
+                                </NavLink>
+                            </li>
                     </ul>
                 </div>
             </div>
