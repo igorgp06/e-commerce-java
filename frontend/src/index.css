@@ -1,3 +1,106 @@
+@charset "UTF-8";
 @import "tailwindcss";
-@plugin "daisyui";
 
+@theme {
+    --color-blue-1: hsl(var(--blue-1));
+    --color-blue-2: hsl(var(--blue-2));
+    --color-blue-3: hsl(var(--blue-3));
+    --color-green-1: hsl(var(--green-1));
+    --color-dark-gold-1: hsl(var(--dark-gold-1));
+
+    --color-white: hsl(var(--white));
+    --color-black: hsl(var(--black));
+
+    --color-background: var(--color-white);
+    --color-foreground: var(--color-black);
+
+    --color-primary: var(--color-blue-1);
+    --color-primary-hover: var(--color-blue-2);
+    --color-primary-active: var(--color-blue-3);
+    --color-secondary: var(--color-green-1);
+    --color-accent: var(--color-dark-gold-1);
+    --color-border: var(--color-black);
+
+    --animate-fade-in: fade-in 0.7s ease-out forwards;
+    --animate-fade-in-delay-1: fade-in 0.4s ease-out 0.2s forwards;
+    --animate-fade-in-delay-2: fade-in 0.5s ease-out 0.4s forwards;
+    --animate-fade-in-delay-3: fade-in 0.6s ease-out 0.6s forwards;
+    --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
+    --animate-fade-in-delay-5: fade-in 0.8s ease-out 1s forwards;
+    --animate-fade-in-delay-6: fade-in 0.9s ease-out 1.2s forwards;
+}
+
+@layer base {
+    :root {
+        --blue-1: 196.901, 96%, 43%;
+        --blue-2: 190.986, 96%, 43%;
+        --blue-3: 185.775, 96%, 38%;
+        --green-1: 67.619, 97%, 13%;
+        --dark-gold-1: 49.927, 96%, 28%;
+
+        --white: 0, 0%, 100%;
+        --black: 0, 0%, 0%;
+
+        --background: var(--white);
+        --foreground: var(--black);
+
+        --primary: var(--blue-1);
+        --primary-hover: var(--blue-2);
+        --primary-active: var(--blue-3);
+        --secondary: var(--green-1);
+        --accent: var(--dark-gold-1);
+        --border: var(--black);
+
+        --card: var(--white);
+        --card-foreground: var(--black);
+    }
+
+    html {
+        @apply scroll-smooth;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    }
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 1rem;
+
+    @media (width >=640px) {
+        max-width: 640px;
+    }
+
+    @media (width >=768px) {
+        max-width: 768px;
+    }
+
+    @media (width >=1024px) {
+        max-width: 1024px;
+    }
+
+    @media (width >=1280px) {
+        max-width: 1280px;
+    }
+
+    @media (width >=1400px) {
+        max-width: 1400px;
+    }
+}
+
+@utility buttons {
+    @apply inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-300;
+}
+
+@utility card-hover {
+    @apply transition-shadow duration-300 hover:scale-[1.02] hover:shadow-lg;
+}
+
+#root {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}

@@ -2,6 +2,7 @@ package br.com.igorgpdev.backend.service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class PessoaClienteService {
 
     @Autowired
     private EmailService emailService;
+
+    public List<Pessoa> findAll() {
+        return pessoaClienteRepository.findAll();
+    }
 
     public Pessoa register(PessoaClienteRequestDTO pessoaDTO) {
 
@@ -51,12 +56,41 @@ public class PessoaClienteService {
         return novaPessoa;
     }
 
+    public Pessoa change(Long id, PessoaClienteRequestDTO pessoaDTO) {
+        Pessoa clienteAtual = pessoaClienteRepository.findById(id).orElseThrow();
+
+        if (!clienteAtual.getCpf().equals(pessoaDTO.getCpf()) && pessoaClienteRepository.existsByCpfAndIdNot(pessoaDTO.getCpf(), id)) {
+            throw new IllegalArgumentException("CPF ja cadastrado no sistema.");
+        }
+
+        if (!clienteAtual.getEmail().equals(pessoaDTO.getEmail()) && pessoaClienteRepository.existsByEmailAndIdNot(pessoaDTO.getEmail(), id)) {
+            throw new IllegalArgumentException("Email ja cadastrado no sistema.");
+        }
+
+        clienteAtual.setNome(pessoaDTO.getNome());
+        clienteAtual.setCpf(pessoaDTO.getCpf());
+        clienteAtual.setEmail(pessoaDTO.getEmail());
+        clienteAtual.setEndereco(pessoaDTO.getEndereco());
+        clienteAtual.setCep(pessoaDTO.getCep());
+        clienteAtual.setCidade(pessoaDTO.getCidade());
+        clienteAtual.setDataAtualizacao(new Date());
+
+        return pessoaClienteRepository.saveAndFlush(clienteAtual);
+    }
+
+    public void delete(Long id) {
+        Pessoa cliente = pessoaClienteRepository.findById(id).orElseThrow();
+        pessoaClienteRepository.delete(cliente);
+    }
+
     private String gerarSenhaTemp(int tamanho) {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!";
         StringBuilder sb = new StringBuilder();
 
         java.util.Random r = new java.util.Random();
-        for (int i = 0; i < tamanho; i++) sb.append(chars.charAt(r.nextInt(chars.length())));
+        for (int i = 0; i < tamanho; i++) {
+            sb.append(chars.charAt(r.nextInt(chars.length())));
+        }
         return sb.toString();
     }
 }
