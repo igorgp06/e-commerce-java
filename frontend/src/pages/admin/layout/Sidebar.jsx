@@ -12,15 +12,15 @@ const menuItems = [
 
 export const Sidebar = () => {
     return (
-        <aside className="bg-base-100 border-r border-base-300 w-full lg:w-64">
-            <h2 className="p-4 text-lg font-semibold">Menu</h2>
-            <nav className="p-2">
+        <aside className="app-sidebar w-full lg:w-64">
+            <h2 className="px-4 pb-4 text-lg font-semibold text-secondary">Menu</h2>
+            <nav className="space-y-1 px-2">
                 {menuItems.map((item) => (
                     <NavLink
                         key={item.to}
                         to={item.to}
                         className={({ isActive }) =>
-                            `block px-4 py-2 rounded-md ${isActive ? "bg-primary text-primary-content" : "hover:bg-base-200"}`
+                            `app-sidebar-link ${isActive ? "app-sidebar-link-active" : ""}`
                         }
                     >
                         {item.label}

@@ -11,13 +11,13 @@ export const MainAdm = () => {
     }
 
     return (
-        <div className="min-h-screen bg-base-200 lg:grid lg:grid-cols-[16rem_1fr]">
+        <div className="app-admin-shell">
             <Sidebar />
 
             <div className="flex min-h-screen flex-col">
-                <nav className="navbar bg-base-100 shadow-sm">
-                    <div className="flex-1 px-2 text-lg font-semibold">Painel Administrativo</div>
-                    <button className="btn btn-sm btn-outline mr-3" onClick={handleLogout}>
+                <nav className="app-topbar">
+                    <div className="flex-1 px-2 text-lg font-semibold text-secondary">Painel Administrativo</div>
+                    <button className="app-btn app-btn-neutral app-btn-sm" onClick={handleLogout}>
                         Sair
                     </button>
                 </nav>

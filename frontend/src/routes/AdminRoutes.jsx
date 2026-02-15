@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
 import { MainAdm } from "../pages/admin/MainAdm";
-import { DashboardHome } from "../pages/admin/dashboard/DashboardHome";
+import { Dashboard } from "../pages/admin/partials/dashboard/Dashboard";
 import { EstadosPage } from "../pages/admin/partials/estados/EstadosPage";
 import { AdminLogin } from "../pages/admin/auth/AdminLogin";
 import { CategoriasPage } from "../pages/admin/partials/categorias/CategoriasPage";
@@ -26,7 +26,7 @@ export default function AdminRoutes() {
 
                 <Route index element={<Navigate to="dashboard" replace />} />
 
-                <Route path="dashboard" element={<DashboardHome />} />
+                <Route path="dashboard" element={<Dashboard />} />
 
                 <Route path="estados" element={<EstadosPage />} />
                 <Route path="cidades" element={<CidadesPage />} />

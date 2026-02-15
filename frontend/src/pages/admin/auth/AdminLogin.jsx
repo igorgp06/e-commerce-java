@@ -33,38 +33,38 @@ export const AdminLogin = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-base-200 p-4">
-            <div className="card w-full max-w-md bg-base-100 shadow-xl">
-                <div className="card-body">
-                    <h1 className="text-2xl font-bold">Login Administrativo</h1>
+        <div className="min-h-screen flex items-center justify-center app-admin-shell p-4">
+            <div className="app-surface w-full max-w-md text-left">
+                <div className="space-y-3">
+                    <h1 className="text-2xl font-bold text-secondary">Login Administrativo</h1>
                     <p className="text-sm opacity-80">Acesse para gerenciar estados.</p>
 
                     <form className="space-y-4 mt-4" onSubmit={handleLogin}>
-                        <label className="form-control w-full">
-                            <span className="label-text mb-1">Usuário</span>
+                        <label className="w-full text-left space-y-1 block">
+                            <span className="text-sm font-medium text-secondary">Usuário</span>
                             <input
                                 type="text"
-                                className="input input-bordered w-full"
+                                className="app-input"
                                 value={username}
                                 onChange={(event) => setUsername(event.target.value)}
                                 required
                             />
                         </label>
 
-                        <label className="form-control w-full">
-                            <span className="label-text mb-1">Senha</span>
+                        <label className="w-full text-left space-y-1 block">
+                            <span className="text-sm font-medium text-secondary">Senha</span>
                             <input
                                 type="password"
-                                className="input input-bordered w-full"
+                                className="app-input"
                                 value={password}
                                 onChange={(event) => setPassword(event.target.value)}
                                 required
                             />
                         </label>
 
-                        {error && <div className="alert alert-error text-sm">{error}</div>}
+                        {error && <div className="app-alert-error text-sm">{error}</div>}
 
-                        <button className="btn btn-primary w-full" type="submit" disabled={loading}>
+                        <button className="app-btn w-full" type="submit" disabled={loading}>
                             {loading ? "Entrando..." : "Entrar"}
                         </button>
                     </form>

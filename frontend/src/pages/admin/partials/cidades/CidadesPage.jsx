@@ -39,24 +39,24 @@ export const CidadesPage = () => {
     };
 
     return (
-        <div className="space-y-4">
-            <h1 className="text-2xl font-bold">Cidades</h1>
-            <form className="card bg-base-100 shadow p-4 grid md:grid-cols-3 gap-3" onSubmit={handleSubmit}>
-                <input className="input input-bordered md:col-span-2" placeholder="Nome da cidade" value={formData.nome} onChange={(e) => setFormData((prev) => ({ ...prev, nome: e.target.value }))} required />
-                <select className="select select-bordered" value={formData.estadoId} onChange={(e) => setFormData((prev) => ({ ...prev, estadoId: e.target.value }))} required>
+        <div className="space-y-4 text-left">
+            <h1 className="app-title">Cidades</h1>
+            <form className="app-surface flex flex-col gap-3 md:flex-row" onSubmit={handleSubmit}>
+                <input className="app-input md:col-span-2" placeholder="Nome da cidade" value={formData.nome} onChange={(e) => setFormData((prev) => ({ ...prev, nome: e.target.value }))} required />
+                <select className="app-select" value={formData.estadoId} onChange={(e) => setFormData((prev) => ({ ...prev, estadoId: e.target.value }))} required>
                     <option value="">Selecione o estado</option>
                     {estados.map((estado) => <option key={estado.id} value={estado.id}>{estado.nome} ({estado.sigla})</option>)}
                 </select>
-                <button className="btn btn-primary md:col-span-3" type="submit">{editingId ? "Salvar" : "Cadastrar"}</button>
+                <button className="app-btn md:col-span-3" type="submit">{editingId ? "Salvar" : "Cadastrar"}</button>
             </form>
-            <div className="overflow-x-auto bg-base-100 shadow rounded-box">
-                <table className="table"><thead><tr><th>ID</th><th>Cidade</th><th>Estado</th><th>Ações</th></tr></thead><tbody>
+            <div className="app-table-wrap">
+                <table className="app-table"><thead><tr><th>ID</th><th>Cidade</th><th>Estado</th><th className="text-right">Ações</th></tr></thead><tbody>
                     {cidades.map((cidade) => (
                         <tr key={cidade.id}>
                             <td>{cidade.id}</td><td>{cidade.nome}</td><td>{cidade.estado?.nome}</td>
-                            <td className="space-x-2">
-                                <button className="btn btn-sm" onClick={() => { setEditingId(cidade.id); setFormData({ nome: cidade.nome, estadoId: cidade.estado?.id?.toString() || "" }); }}>Editar</button>
-                                <button className="btn btn-sm btn-error" onClick={async () => { await apiRequestWithAdminToken(`/api/cidades/${cidade.id}`, { method: "DELETE" }); await loadData(); }}>Excluir</button>
+                            <td className="text-right space-x-2">
+                                <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(cidade.id); setFormData({ nome: cidade.nome, estadoId: cidade.estado?.id?.toString() || "" }); }}>Editar</button>
+                                <button className="app-btn app-btn-danger app-btn-sm" onClick={async () => { await apiRequestWithAdminToken(`/api/cidades/${cidade.id}`, { method: "DELETE" }); await loadData(); }}>Excluir</button>
                             </td>
                         </tr>
                     ))}

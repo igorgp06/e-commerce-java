@@ -50,9 +50,6 @@
         --secondary: var(--green-1);
         --accent: var(--dark-gold-1);
         --border: var(--black);
-
-        --card: var(--white);
-        --card-foreground: var(--black);
     }
 
     html {
@@ -62,6 +59,135 @@
     body {
         @apply bg-background text-foreground;
         font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    }
+}
+
+@layer components {
+    .app-admin-shell {
+        @apply min-h-screen lg:grid lg:grid-cols-[16rem_1fr];
+        background: linear-gradient(150deg, hsl(var(--white)) 0%, color-mix(in srgb, hsl(var(--blue-1)) 10%, white) 100%);
+    }
+
+    .app-surface {
+        @apply rounded-xl border p-4 shadow-sm;
+        border-color: color-mix(in srgb, hsl(var(--secondary)) 25%, white);
+        background-color: hsl(var(--white));
+    }
+
+    .app-title {
+        color: hsl(var(--secondary));
+        @apply text-2xl font-bold;
+    }
+
+    .app-input,
+    .app-select,
+    .app-textarea,
+    .app-file {
+        @apply w-full rounded-lg border px-3 py-2 text-sm transition-colors duration-200 outline-none;
+        border-color: color-mix(in srgb, hsl(var(--secondary)) 30%, white);
+        background-color: hsl(var(--white));
+    }
+
+    .app-textarea {
+        @apply min-h-28;
+    }
+
+    .app-input:focus,
+    .app-select:focus,
+    .app-textarea:focus,
+    .app-file:focus {
+        border-color: hsl(var(--primary));
+        box-shadow: 0 0 0 3px color-mix(in srgb, hsl(var(--primary)) 20%, transparent);
+    }
+
+    .app-btn {
+        @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200;
+        background-color: hsl(var(--primary));
+        color: hsl(var(--white));
+    }
+
+    .app-btn:hover {
+        background-color: hsl(var(--primary-hover));
+    }
+
+    .app-btn:active {
+        background-color: hsl(var(--primary-active));
+    }
+
+    .app-btn-neutral {
+        @apply border;
+        border-color: color-mix(in srgb, hsl(var(--secondary)) 30%, white);
+        color: hsl(var(--secondary));
+        background-color: color-mix(in srgb, hsl(var(--secondary)) 10%, white);
+    }
+
+    .app-btn-danger {
+        @apply bg-red-600 hover:bg-red-700 text-white;
+    }
+
+    .app-btn-sm {
+        @apply px-3 py-1.5 text-xs;
+    }
+
+    .app-alert {
+        @apply rounded-lg border px-4 py-3 text-sm;
+    }
+
+    .app-alert-success {
+        @apply rounded-lg border px-4 py-3 text-sm;
+        border-color: color-mix(in srgb, hsl(var(--secondary)) 40%, white);
+        background-color: color-mix(in srgb, hsl(var(--secondary)) 12%, white);
+        color: hsl(var(--secondary));
+    }
+
+    .app-alert-error {
+        @apply rounded-lg border px-4 py-3 text-sm border-red-300 bg-red-50 text-red-700;
+    }
+
+    .app-table-wrap {
+        @apply overflow-x-auto rounded-xl border shadow-sm;
+        border-color: color-mix(in srgb, hsl(var(--secondary)) 20%, white);
+        background-color: hsl(var(--white));
+    }
+
+    .app-table {
+        @apply min-w-full text-left text-sm;
+    }
+
+    .app-table th {
+        @apply border-b px-4 py-3 text-xs font-semibold uppercase tracking-wide;
+        border-color: color-mix(in srgb, hsl(var(--secondary)) 20%, white);
+    }
+
+    .app-table td {
+        @apply border-b px-4 py-3 align-middle;
+        border-color: color-mix(in srgb, hsl(var(--secondary)) 15%, white);
+    }
+
+    .app-topbar {
+        @apply flex items-center justify-between border-b px-3 py-3 lg:px-5;
+        border-color: color-mix(in srgb, hsl(var(--secondary)) 18%, white);
+        background-color: hsl(var(--white));
+    }
+
+    .app-sidebar {
+        @apply border-r p-4;
+        border-color: color-mix(in srgb, hsl(var(--secondary)) 18%, white);
+        background: linear-gradient(180deg, color-mix(in srgb, hsl(var(--secondary)) 10%, white) 0%, hsl(var(--white)) 100%);
+    }
+
+    .app-sidebar-link {
+        @apply block rounded-lg px-4 py-2 text-sm font-medium transition-colors;
+        color: hsl(var(--secondary));
+    }
+
+    .app-sidebar-link:hover {
+        background-color: color-mix(in srgb, hsl(var(--primary)) 12%, white);
+    }
+
+    .app-sidebar-link-active {
+        background-color: hsl(var(--primary));
+        color: hsl(var(--white));
     }
 }
 

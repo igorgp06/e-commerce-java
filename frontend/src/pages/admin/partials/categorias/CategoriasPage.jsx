@@ -54,19 +54,19 @@ export const CategoriasPage = () => {
     };
 
     return (
-        <div className="space-y-4">
-            <h1 className="text-2xl font-bold">Categorias</h1>
-            <form className="card bg-base-100 shadow p-4 gap-3 flex" onSubmit={handleSubmit}>
-                <input className="input input-bordered" placeholder="Nome da categoria" value={formData.nome} onChange={(e) => setFormData({ nome: e.target.value })} required />
+        <div className="space-y-4 text-left">
+            <h1 className="app-title">Categorias</h1>
+            <form className="app-surface flex flex-col gap-3 md:flex-row" onSubmit={handleSubmit}>
+                <input className="app-input" placeholder="Nome da categoria" value={formData.nome} onChange={(e) => setFormData({ nome: e.target.value })} required />
                 <div className="flex gap-2">
-                    <button className="btn btn-primary" type="submit">{editingId ? "Salvar" : "Cadastrar"}</button>
-                    {editingId && <button className="btn" type="button" onClick={resetForm}>Cancelar</button>}
+                    <button className="app-btn" type="submit">{editingId ? "Salvar" : "Cadastrar"}</button>
+                    {editingId && <button className="app-btn app-btn-neutral" type="button" onClick={resetForm}>Cancelar</button>}
                 </div>
             </form>
-            {message && <div className="alert alert-success">{message}</div>}
-            {error && <div className="alert alert-error">{error}</div>}
-            <div className="overflow-x-auto bg-base-100 shadow rounded-box">
-                <table className="table">
+            {message && <div className="app-alert-success">{message}</div>}
+            {error && <div className="app-alert-error">{error}</div>}
+            <div className="app-table-wrap">
+                <table className="app-table">
                     <thead><tr><th>ID</th><th>Nome</th><th className="text-right">Ações</th></tr></thead>
                     <tbody>
                         {loading && <tr><td colSpan={3}>Carregando...</td></tr>}
@@ -74,8 +74,8 @@ export const CategoriasPage = () => {
                             <tr key={categoria.id}>
                                 <td>{categoria.id}</td><td>{categoria.nome}</td>
                                 <td className="text-right space-x-2">
-                                    <button className="btn btn-sm" onClick={() => { setEditingId(categoria.id); setFormData({ nome: categoria.nome }); }}>Editar</button>
-                                    <button className="btn btn-sm btn-error" onClick={() => handleDelete(categoria.id)}>Excluir</button>
+                                    <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(categoria.id); setFormData({ nome: categoria.nome }); }}>Editar</button>
+                                    <button className="app-btn app-btn-danger app-btn-sm" onClick={() => handleDelete(categoria.id)}>Excluir</button>
                                 </td>
                             </tr>
                         ))}

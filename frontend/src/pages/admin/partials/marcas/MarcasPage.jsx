@@ -33,22 +33,22 @@ export const MarcasPage = () => {
     };
 
     return (
-        <div className="space-y-4">
-            <h1 className="text-2xl font-bold">Marcas</h1>
-            <form className="card bg-base-100 shadow p-4 gap-3 flex" onSubmit={handleSubmit}>
-                <input className="input input-bordered" placeholder="Nome da marca" value={formData.nome} onChange={(e) => setFormData({ nome: e.target.value })} required />
-                <button className="btn btn-primary" type="submit">{editingId ? "Salvar" : "Cadastrar"}</button>
+        <div className="space-y-4 text-left">
+            <h1 className="app-title">Marcas</h1>
+            <form className="app-surface flex flex-col gap-3 md:flex-row" onSubmit={handleSubmit}>
+                <input className="app-input" placeholder="Nome da marca" value={formData.nome} onChange={(e) => setFormData({ nome: e.target.value })} required />
+                <button className="app-btn" type="submit">{editingId ? "Salvar" : "Cadastrar"}</button>
             </form>
-            <div className="overflow-x-auto bg-base-100 shadow rounded-box">
-                <table className="table">
-                    <thead><tr><th>ID</th><th>Nome</th><th>Ações</th></tr></thead>
+            <div className="app-table-wrap">
+                <table className="app-table">
+                    <thead><tr><th>ID</th><th>Nome</th><th className="text-right">Ações</th></tr></thead>
                     <tbody>
                         {marcas.map((marca) => (
                             <tr key={marca.id}>
                                 <td>{marca.id}</td><td>{marca.nome}</td>
-                                <td className="space-x-2">
-                                    <button className="btn btn-sm" onClick={() => { setEditingId(marca.id); setFormData({ nome: marca.nome }); }}>Editar</button>
-                                    <button className="btn btn-sm btn-error" onClick={async () => { await apiRequestWithAdminToken(`/api/marcas/${marca.id}`, { method: "DELETE" }); await loadMarcas(); }}>Excluir</button>
+                                <td className="text-right space-x-2">
+                                    <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(marca.id); setFormData({ nome: marca.nome }); }}>Editar</button>
+                                    <button className="app-btn app-btn-danger app-btn-sm" onClick={async () => { await apiRequestWithAdminToken(`/api/marcas/${marca.id}`, { method: "DELETE" }); await loadMarcas(); }}>Excluir</button>
                                 </td>
                             </tr>
                         ))}
