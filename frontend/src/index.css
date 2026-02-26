@@ -64,8 +64,21 @@
 
 @layer components {
     .app-admin-shell {
-        @apply min-h-screen lg:grid lg:grid-cols-[16rem_1fr];
+        --sidebar-width: 16rem;
+        --sidebar-collapsed-width: 4rem;
+        @apply min-h-screen flex flex-col;
         background: linear-gradient(150deg, hsl(var(--white)) 0%, color-mix(in srgb, hsl(var(--blue-1)) 10%, white) 100%);
+    }
+
+    @media (width >=1024px) {
+        .app-admin-shell {
+            display: grid;
+            grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+        }
+
+        .app-admin-shell.app-admin-shell-collapsed {
+            grid-template-columns: var(--sidebar-collapsed-width) minmax(0, 1fr);
+        }
     }
 
     .app-surface {
@@ -171,18 +184,91 @@
     }
 
     .app-sidebar {
-        @apply border-r p-4;
+        @apply fixed inset-y-0 left-0 z-40 w-[16rem] border-r p-4 transition-transform duration-300;
+        transform: translateX(-100%);
         border-color: color-mix(in srgb, hsl(var(--secondary)) 18%, white);
         background: linear-gradient(180deg, color-mix(in srgb, hsl(var(--secondary)) 10%, white) 0%, hsl(var(--white)) 100%);
     }
 
+    .app-sidebar-mobile-open {
+        transform: translateX(0);
+    }
+
+    .app-sidebar-overlay {
+        @apply fixed inset-0 z-30 bg-black/35 lg:hidden;
+    }
+
+    .app-sidebar-header {
+        @apply mb-4 flex items-center justify-between gap-2;
+    }
+
+    .app-sidebar-toggle {
+        @apply h-8 w-8 p-0;
+    }
+
+    .app-sidebar-toggle svg {
+        @apply h-4 w-4;
+    }
+
     .app-sidebar-link {
-        @apply block rounded-lg px-4 py-2 text-sm font-medium transition-colors;
+        @apply flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium transition-colors;
         color: hsl(var(--secondary));
+        white-space: nowrap;
+    }
+
+
+    .app-sidebar-icon {
+        @apply inline-flex h-5 w-5 items-center justify-center;
+    }
+
+    .app-sidebar-icon svg {
+        @apply h-5 w-5;
+    }
+
+    .app-sidebar-label {
+        @apply transition-opacity duration-200;
+    }
+
+    @media (width >=1024px) {
+        .app-sidebar {
+            @apply sticky top-0 h-screen;
+            width: auto;
+            transform: none;
+        }
+
+        .app-sidebar-collapsed {
+            @apply px-3;
+        }
+
+        .app-sidebar-collapsed .app-sidebar-header h2,
+        .app-sidebar-collapsed .app-sidebar-label {
+            @apply hidden;
+        }
+
+        .app-sidebar-collapsed .app-sidebar-link {
+            @apply justify-center px-2;
+        }
+
+        .app-sidebar-collapsed .app-sidebar-toggle {
+            @apply mx-auto;
+        }
     }
 
     .app-sidebar-link:hover {
         background-color: color-mix(in srgb, hsl(var(--primary)) 12%, white);
+    }
+
+    .app-actions-cell {
+        @apply text-right;
+        white-space: nowrap;
+    }
+
+    .app-actions-cell .app-btn+.app-btn {
+        @apply ml-2;
+    }
+
+    .app-actions-group {
+        @apply inline-flex flex-nowrap justify-end gap-2;
     }
 
     .app-sidebar-link-active {
@@ -211,8 +297,8 @@
         max-width: 1280px;
     }
 
-    @media (width >=1400px) {
-        max-width: 1400px;
+    @media (width >=1650px) {
+        max-width: 1650px;
     }
 }
 

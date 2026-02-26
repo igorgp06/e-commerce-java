@@ -41,14 +41,16 @@ export const MarcasPage = () => {
             </form>
             <div className="app-table-wrap">
                 <table className="app-table">
-                    <thead><tr><th>ID</th><th>Nome</th><th className="text-right">Ações</th></tr></thead>
+                    <thead><tr><th>ID</th><th>Nome</th><th className="app-actions-cell">Ações</th></tr></thead>
                     <tbody>
                         {marcas.map((marca) => (
                             <tr key={marca.id}>
                                 <td>{marca.id}</td><td>{marca.nome}</td>
-                                <td className="text-right space-x-2">
-                                    <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(marca.id); setFormData({ nome: marca.nome }); }}>Editar</button>
-                                    <button className="app-btn app-btn-danger app-btn-sm" onClick={async () => { await apiRequestWithAdminToken(`/api/marcas/${marca.id}`, { method: "DELETE" }); await loadMarcas(); }}>Excluir</button>
+                                <td className="app-actions-cell">
+                                    <div className="app-actions-group">
+                                        <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(marca.id); setFormData({ nome: marca.nome }); }}>Editar</button>
+                                        <button className="app-btn app-btn-danger app-btn-sm" onClick={async () => { await apiRequestWithAdminToken(`/api/marcas/${marca.id}`, { method: "DELETE" }); await loadMarcas(); }}>Excluir</button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

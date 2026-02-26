@@ -74,16 +74,18 @@ export const EstadosPage = () => {
 
             <div className="app-table-wrap">
                 <table className="app-table">
-                    <thead><tr><th>ID</th><th>Nome</th><th>Sigla</th><th className="text-right">Ações</th></tr></thead>
+                    <thead><tr><th>ID</th><th>Nome</th><th>Sigla</th><th className="app-actions-cell">Ações</th></tr></thead>
                     <tbody>
                         {loading && <tr><td colSpan={4}>Carregando...</td></tr>}
                         {!loading && estados.length === 0 && <tr><td colSpan={4}>Nenhum estado cadastrado.</td></tr>}
                         {!loading && estados.map((estado) => (
                             <tr key={estado.id}>
                                 <td>{estado.id}</td><td>{estado.nome}</td><td>{estado.sigla}</td>
-                                <td className="text-right flex justify-end gap-2">
-                                    <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(estado.id); setFormData({ nome: estado.nome, sigla: estado.sigla }); }}>Editar</button>
-                                    <button className="app-btn app-btn-danger app-btn-sm" onClick={async () => { await apiRequestWithAdminToken(`/api/estados/${estado.id}`, { method: "DELETE" }); if (editingId === estado.id) resetForm(); await loadEstados(); }}>Excluir</button>
+                                <td className="app-actions-cell">
+                                    <div className="app-actions-group">
+                                        <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(estado.id); setFormData({ nome: estado.nome, sigla: estado.sigla }); }}>Editar</button>
+                                        <button className="app-btn app-btn-danger app-btn-sm" onClick={async () => { await apiRequestWithAdminToken(`/api/estados/${estado.id}`, { method: "DELETE" }); if (editingId === estado.id) resetForm(); await loadEstados(); }}>Excluir</button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

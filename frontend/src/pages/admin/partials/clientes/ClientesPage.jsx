@@ -57,11 +57,11 @@ export const ClientesPage = () => {
             </form>
 
             <div className="app-table-wrap">
-                <table className="app-table"><thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Cidade</th><th className="text-right">Ações</th></tr></thead><tbody>
+                <table className="app-table"><thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Cidade</th><th className="app-actions-cell">Ações</th></tr></thead><tbody>
                     {clientes.map((cliente) => (
                         <tr key={cliente.id}>
                             <td>{cliente.id}</td><td>{cliente.nome}</td><td>{cliente.email}</td><td>{cliente.cidade?.nome}</td>
-                            <td className="text-right">
+                            <td className="app-actions-cell">
                                 <button className="app-btn app-btn-danger app-btn-sm" onClick={async () => { await apiRequestWithAdminToken(`/api/clientes/${cliente.id}`, { method: "DELETE" }); await loadData(); }}>Excluir</button>
                             </td>
                         </tr>

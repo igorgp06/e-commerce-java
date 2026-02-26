@@ -87,11 +87,11 @@ export const ProdutosPage = () => {
             </form>
 
             <div className="app-table-wrap">
-                <table className="app-table"><thead><tr><th>ID</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Preço</th><th className="text-right">Ações</th></tr></thead><tbody>
+                <table className="app-table"><thead><tr><th>ID</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Preço</th><th className="app-actions-cell">Ações</th></tr></thead><tbody>
                     {produtos.map((produto) => (
                         <tr key={produto.id}>
                             <td>{produto.id}</td><td>{produto.nome}</td><td>{produto.marca?.nome}</td><td>{produto.categoria?.nome}</td><td>R$ {Number(produto.precoVenda || 0).toFixed(2)}</td>
-                            <td className="text-right"><button className="app-btn app-btn-sm app-btn-danger" onClick={async () => { await apiRequestWithAdminToken(`/api/produtos/${produto.id}`, { method: "DELETE" }); await loadData(); }}>Excluir</button></td>
+                            <td className="app-actions-cell"><div className="app-actions-group"><button className="app-btn app-btn-sm app-btn-danger" onClick={async () => { await apiRequestWithAdminToken(`/api/produtos/${produto.id}`, { method: "DELETE" }); await loadData(); }}>Excluir</button></div></td>
                         </tr>
                     ))}
                 </tbody></table>

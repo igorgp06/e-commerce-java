@@ -67,15 +67,17 @@ export const CategoriasPage = () => {
             {error && <div className="app-alert-error">{error}</div>}
             <div className="app-table-wrap">
                 <table className="app-table">
-                    <thead><tr><th>ID</th><th>Nome</th><th className="text-right">Ações</th></tr></thead>
+                    <thead><tr><th>ID</th><th>Nome</th><th className="app-actions-cell">Ações</th></tr></thead>
                     <tbody>
                         {loading && <tr><td colSpan={3}>Carregando...</td></tr>}
                         {!loading && categorias.map((categoria) => (
                             <tr key={categoria.id}>
                                 <td>{categoria.id}</td><td>{categoria.nome}</td>
-                                <td className="text-right space-x-2">
-                                    <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(categoria.id); setFormData({ nome: categoria.nome }); }}>Editar</button>
-                                    <button className="app-btn app-btn-danger app-btn-sm" onClick={() => handleDelete(categoria.id)}>Excluir</button>
+                                <td className="app-actions-cell">
+                                    <div className="app-actions-group">
+                                        <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(categoria.id); setFormData({ nome: categoria.nome }); }}>Editar</button>
+                                        <button className="app-btn app-btn-danger app-btn-sm" onClick={() => handleDelete(categoria.id)}>Excluir</button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

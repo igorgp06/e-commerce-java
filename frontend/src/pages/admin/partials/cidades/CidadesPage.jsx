@@ -50,11 +50,11 @@ export const CidadesPage = () => {
                 <button className="app-btn md:col-span-3" type="submit">{editingId ? "Salvar" : "Cadastrar"}</button>
             </form>
             <div className="app-table-wrap">
-                <table className="app-table"><thead><tr><th>ID</th><th>Cidade</th><th>Estado</th><th className="text-right">Ações</th></tr></thead><tbody>
+                <table className="app-table"><thead><tr><th>ID</th><th>Cidade</th><th>Estado</th><th className="app-actions-cell">Ações</th></tr></thead><tbody>
                     {cidades.map((cidade) => (
                         <tr key={cidade.id}>
                             <td>{cidade.id}</td><td>{cidade.nome}</td><td>{cidade.estado?.nome}</td>
-                            <td className="text-right space-x-2">
+                            <td className="app-actions-cell">
                                 <button className="app-btn app-btn-neutral app-btn-sm" onClick={() => { setEditingId(cidade.id); setFormData({ nome: cidade.nome, estadoId: cidade.estado?.id?.toString() || "" }); }}>Editar</button>
                                 <button className="app-btn app-btn-danger app-btn-sm" onClick={async () => { await apiRequestWithAdminToken(`/api/cidades/${cidade.id}`, { method: "DELETE" }); await loadData(); }}>Excluir</button>
                             </td>
