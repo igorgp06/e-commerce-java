@@ -216,7 +216,6 @@
         white-space: nowrap;
     }
 
-
     .app-sidebar-icon {
         @apply inline-flex h-5 w-5 items-center justify-center;
     }

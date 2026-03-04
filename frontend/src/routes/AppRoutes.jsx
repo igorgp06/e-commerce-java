@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 // públicas
 import { Main } from "../pages/Main";
-import { Home } from "../pages/public/home/Home";
+import { MainPublic } from "../pages/public/MainPublic";
 import { NotFound } from "../pages/err/NotFound";
 
 // admin
@@ -13,7 +13,7 @@ export default function AppRoutes() {
         <Routes>
             {/* rotas publias */}
             <Route path="/" element={<Main />}>
-                <Route index element={<Home />} />
+                <Route index element={<MainPublic />} />
             </Route>
 
             {/* rota admin "gerenciada" pelo AdminRoutes */}
