@@ -18,8 +18,15 @@ export const MainAdm = () => {
             <Sidebar
                 collapsed={sidebarCollapsed}
                 mobileOpen={mobileSidebarOpen}
-                onToggle={() => setSidebarCollapsed((prev) => !prev)}
-                onClose={() => setMobileSidebarOpen(false)}
+                onToggle={() => {
+                    if (mobileSidebarOpen) {
+                        setMobileSidebarOpen(false);
+                        return;
+                    }
+
+                    setSidebarCollapsed((prev) => !prev);
+                }}
+
             />
 
             <div className="flex min-h-screen flex-col lg:min-w-0">

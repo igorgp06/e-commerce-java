@@ -2,11 +2,10 @@
 @import "tailwindcss";
 
 @theme {
-    --color-blue-1: hsl(var(--blue-1));
-    --color-blue-2: hsl(var(--blue-2));
-    --color-blue-3: hsl(var(--blue-3));
-    --color-green-1: hsl(var(--green-1));
-    --color-dark-gold-1: hsl(var(--dark-gold-1));
+    --color-brand-1: hsl(var(--brand-1));
+    --color-brand-2: hsl(var(--brand-2));
+    --color-brand-3: hsl(var(--brand-3));
+    --color-accent-1: hsl(var(--accent-1));
 
     --color-white: hsl(var(--white));
     --color-black: hsl(var(--black));
@@ -14,42 +13,23 @@
     --color-background: var(--color-white);
     --color-foreground: var(--color-black);
 
-    --color-primary: var(--color-blue-1);
-    --color-primary-hover: var(--color-blue-2);
-    --color-primary-active: var(--color-blue-3);
-    --color-secondary: var(--color-green-1);
-    --color-accent: var(--color-dark-gold-1);
-    --color-border: var(--color-black);
-
-    --animate-fade-in: fade-in 0.7s ease-out forwards;
-    --animate-fade-in-delay-1: fade-in 0.4s ease-out 0.2s forwards;
-    --animate-fade-in-delay-2: fade-in 0.5s ease-out 0.4s forwards;
-    --animate-fade-in-delay-3: fade-in 0.6s ease-out 0.6s forwards;
-    --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
-    --animate-fade-in-delay-5: fade-in 0.8s ease-out 1s forwards;
-    --animate-fade-in-delay-6: fade-in 0.9s ease-out 1.2s forwards;
+    --color-primary: var(--color-brand-1);
+    --color-primary-hover: var(--color-brand-2);
+    --color-primary-active: var(--color-brand-3);
+    --color-secondary: var(--color-brand-3);
+    --color-accent: var(--color-accent-1);
+    --color-border: color-mix(in srgb, var(--color-brand-3) 20%, white);
 }
 
 @layer base {
     :root {
-        --blue-1: 196.901, 96%, 43%;
-        --blue-2: 190.986, 96%, 43%;
-        --blue-3: 185.775, 96%, 38%;
-        --green-1: 67.619, 97%, 13%;
-        --dark-gold-1: 49.927, 96%, 28%;
+        --brand-1: 154 73% 35%;
+        --brand-2: 154 70% 31%;
+        --brand-3: 157 78% 22%;
+        --accent-1: 184 86% 37%;
 
-        --white: 0, 0%, 100%;
-        --black: 0, 0%, 0%;
-
-        --background: var(--white);
-        --foreground: var(--black);
-
-        --primary: var(--blue-1);
-        --primary-hover: var(--blue-2);
-        --primary-active: var(--blue-3);
-        --secondary: var(--green-1);
-        --accent: var(--dark-gold-1);
-        --border: var(--black);
+        --white: 0 0% 100%;
+        --black: 222 47% 11%;
     }
 
     html {
@@ -58,7 +38,7 @@
 
     body {
         @apply bg-background text-foreground;
-        font-family: 'Poppins', Arial, Helvetica, sans-serif;
+        font-family: "Poppins", Arial, Helvetica, sans-serif;
     }
 }
 
@@ -67,7 +47,7 @@
         --sidebar-width: 16rem;
         --sidebar-collapsed-width: 4rem;
         @apply min-h-screen flex flex-col;
-        background: linear-gradient(150deg, hsl(var(--white)) 0%, color-mix(in srgb, hsl(var(--blue-1)) 10%, white) 100%);
+        background: linear-gradient(150deg, hsl(var(--white)) 0%, color-mix(in srgb, hsl(var(--brand-1)) 10%, white) 100%);
     }
 
     @media (width >=1024px) {
@@ -83,21 +63,21 @@
 
     .app-surface {
         @apply rounded-xl border p-4 shadow-sm;
-        border-color: color-mix(in srgb, hsl(var(--secondary)) 25%, white);
+        border-color: var(--color-border);
         background-color: hsl(var(--white));
     }
 
     .app-title {
         color: hsl(var(--secondary));
-        @apply text-2xl font-bold;
+        @apply text-2xl font-bold text-primary;
     }
 
     .app-input,
     .app-select,
     .app-textarea,
     .app-file {
-        @apply w-full rounded-lg border px-3 py-2 text-sm transition-colors duration-200 outline-none;
-        border-color: color-mix(in srgb, hsl(var(--secondary)) 30%, white);
+        @apply w-full rounded-lg border px-3 py-2 text-sm outline-none transition-colors duration-200;
+        border-color: var(--color-border);
         background-color: hsl(var(--white));
     }
 
@@ -109,33 +89,32 @@
     .app-select:focus,
     .app-textarea:focus,
     .app-file:focus {
-        border-color: hsl(var(--primary));
-        box-shadow: 0 0 0 3px color-mix(in srgb, hsl(var(--primary)) 20%, transparent);
+        border-color: hsl(var(--brand-1));
+        box-shadow: 0 0 0 3px color-mix(in srgb, hsl(var(--brand-1)) 20%, transparent);
     }
 
     .app-btn {
-        @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition-all duration-200;
-        background-color: hsl(var(--primary));
-        color: hsl(var(--white));
+        @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-white transition-all duration-200;
+        background-color: hsl(var(--brand-1));
     }
 
     .app-btn:hover {
-        background-color: hsl(var(--primary-hover));
+        background-color: hsl(var(--brand-2));
     }
 
     .app-btn:active {
-        background-color: hsl(var(--primary-active));
+        background-color: hsl(var(--brand-3));
     }
 
     .app-btn-neutral {
         @apply border;
-        border-color: color-mix(in srgb, hsl(var(--secondary)) 30%, white);
-        color: hsl(var(--secondary));
-        background-color: color-mix(in srgb, hsl(var(--secondary)) 10%, white);
+        border-color: var(--color-border);
+        color: hsl(var(--brand-3));
+        background-color: color-mix(in srgb, hsl(var(--brand-1)) 8%, white);
     }
 
     .app-btn-danger {
-        @apply bg-red-600 hover:bg-red-700 text-white;
+        @apply bg-red-600 text-white hover:bg-red-700;
     }
 
     .app-btn-sm {
@@ -148,18 +127,18 @@
 
     .app-alert-success {
         @apply rounded-lg border px-4 py-3 text-sm;
-        border-color: color-mix(in srgb, hsl(var(--secondary)) 40%, white);
-        background-color: color-mix(in srgb, hsl(var(--secondary)) 12%, white);
-        color: hsl(var(--secondary));
+        border-color: color-mix(in srgb, hsl(var(--brand-1)) 35%, white);
+        background-color: color-mix(in srgb, hsl(var(--brand-1)) 12%, white);
+        color: hsl(var(--brand-3));
     }
 
     .app-alert-error {
-        @apply rounded-lg border px-4 py-3 text-sm border-red-300 bg-red-50 text-red-700;
+        @apply rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700;
     }
 
     .app-table-wrap {
         @apply overflow-x-auto rounded-xl border shadow-sm;
-        border-color: color-mix(in srgb, hsl(var(--secondary)) 20%, white);
+        border-color: var(--color-border);
         background-color: hsl(var(--white));
     }
 
@@ -169,25 +148,25 @@
 
     .app-table th {
         @apply border-b px-4 py-3 text-xs font-semibold uppercase tracking-wide;
-        border-color: color-mix(in srgb, hsl(var(--secondary)) 20%, white);
+        border-color: var(--color-border);
     }
 
     .app-table td {
         @apply border-b px-4 py-3 align-middle;
-        border-color: color-mix(in srgb, hsl(var(--secondary)) 15%, white);
+        border-color: color-mix(in srgb, hsl(var(--brand-3)) 14%, white);
     }
 
     .app-topbar {
-        @apply flex items-center justify-between border-b px-3 py-3 lg:px-5;
-        border-color: color-mix(in srgb, hsl(var(--secondary)) 18%, white);
-        background-color: hsl(var(--white));
+        @apply flex items-center justify-between border-b bg-white px-3 py-3 lg:px-5;
+        border-color: var(--color-border);
+
     }
 
     .app-sidebar {
         @apply fixed inset-y-0 left-0 z-40 w-[16rem] border-r p-4 transition-transform duration-300;
         transform: translateX(-100%);
-        border-color: color-mix(in srgb, hsl(var(--secondary)) 18%, white);
-        background: linear-gradient(180deg, color-mix(in srgb, hsl(var(--secondary)) 10%, white) 0%, hsl(var(--white)) 100%);
+        border-color: var(--color-border);
+        background: linear-gradient(180deg, color-mix(in srgb, hsl(var(--brand-1)) 12%, white) 0%, hsl(var(--white)) 100%);
     }
 
     .app-sidebar-mobile-open {
@@ -211,9 +190,17 @@
     }
 
     .app-sidebar-link {
-        @apply flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium transition-colors;
-        color: hsl(var(--secondary));
-        white-space: nowrap;
+        @apply flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors;
+        color: hsl(var(--brand-3));
+    }
+
+    .app-sidebar-link:hover {
+        background-color: color-mix(in srgb, hsl(var(--brand-1)) 12%, white);
+    }
+
+    .app-sidebar-link-active {
+        background-color: hsl(var(--brand-1));
+        color: hsl(var(--white));
     }
 
     .app-sidebar-icon {
@@ -253,65 +240,118 @@
         }
     }
 
-    .app-sidebar-link:hover {
-        background-color: color-mix(in srgb, hsl(var(--primary)) 12%, white);
-    }
-
     .app-actions-cell {
-        @apply text-right;
-        white-space: nowrap;
+        @apply text-right whitespace-nowrap;
     }
 
-    .app-actions-cell .app-btn+.app-btn {
-        @apply ml-2;
+    .public-header-scrolled {
+        @apply py-3 shadow-md backdrop-blur-md;
+        background-color: color-mix(in srgb, hsl(var(--white)) 88%, hsl(var(--brand-1)) 12%);
     }
 
-    .app-actions-group {
-        @apply inline-flex flex-nowrap justify-end gap-2;
+    .public-header {
+        @apply fixed left-0 top-0 z-40 w-full py-4 transition-all duration-300;
+        background-color: transparent;
     }
 
-    .app-sidebar-link-active {
-        background-color: hsl(var(--primary));
-        color: hsl(var(--white));
-    }
-}
-
-@utility container {
-    margin-inline: auto;
-    padding-inline: 1rem;
-
-    @media (width >=640px) {
-        max-width: 640px;
+    .public-header-scrolled {
+        @apply py-3 shadow-md backdrop-blur-md;
+        background-color: color-mix(in srgb, hsl(var(--white)) 88%, hsl(var(--brand-1)) 12%);
     }
 
-    @media (width >=768px) {
-        max-width: 768px;
+    .public-header-inner {
+        @apply flex items-center justify-between;
     }
 
-    @media (width >=1024px) {
-        max-width: 1024px;
+    .public-header-brand {
+        @apply text-2xl font-bold tracking-tight transition-opacity duration-200;
+        color: hsl(var(--brand-3));
     }
 
-    @media (width >=1280px) {
-        max-width: 1280px;
+    .public-header-brand:hover {
+        @apply opacity-80;
     }
 
-    @media (width >=1650px) {
-        max-width: 1650px;
+    .public-header-nav {
+        @apply hidden items-center gap-8 md:flex;
     }
-}
 
-@utility buttons {
-    @apply inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-300;
-}
+    .public-header-link {
+        @apply text-base font-medium text-2xl transition-colors duration-200;
+        color: hsl(var(--brand-3));
+    }
 
-@utility card-hover {
-    @apply transition-shadow duration-300 hover:scale-[1.02] hover:shadow-lg;
-}
+    .public-header-link:hover,
+    .public-header-link-active {
+        color: hsl(var(--brand-1));
+    }
 
-#root {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
+    .public-header-mobile-toggle {
+        @apply fixed right-4 top-3 z-50 rounded-md border p-2 shadow-md transition-colors duration-200 md:hidden;
+        border-color: var(--color-border);
+        color: hsl(var(--brand-3));
+        background-color: color-mix(in srgb, hsl(var(--white)) 88%, hsl(var(--brand-1)) 12%);
+    }
+
+    .public-header-mobile-menu {
+        @apply fixed inset-0 z-30 flex items-center justify-center bg-white/90 opacity-0 backdrop-blur-md pointer-events-none transition-all duration-300 md:hidden;
+    }
+
+    .public-header-mobile-menu-open {
+        @apply pointer-events-auto opacity-100;
+    }
+
+    .public-header-mobile-nav {
+        @apply flex flex-col items-center gap-8;
+    }
+
+    .public-header-mobile-link {
+        @apply text-2xl font-semibold transition-colors duration-200;
+        color: hsl(var(--brand-3));
+    }
+
+    .public-header-mobile-link:hover,
+    .public-header-mobile-link-active {
+        color: hsl(var(--brand-1));
+    }
+
+    @utility container {
+        margin-inline: auto;
+        padding-inline: 1rem;
+
+        @media (width >=640px) {
+            max-width: 640px;
+        }
+
+        @media (width >=768px) {
+            max-width: 768px;
+        }
+
+        @media (width >=1024px) {
+            max-width: 1hpu024px;
+        }
+
+        @media (width >=1280px) {
+            max-width: 1280px;
+        }
+
+        @media (width >=1650px) {
+            max-width: 1650px;
+        }
+    }
+
+    @utility buttons {
+        @apply inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-300;
+    }
+
+    @utility card-hover {
+        @apply transition-shadow duration-300 hover:scale-[1.02] hover:shadow-lg;
+    }
+
+    #root {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+    }
 }

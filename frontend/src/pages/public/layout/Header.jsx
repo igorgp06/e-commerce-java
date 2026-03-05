@@ -4,118 +4,76 @@ import { cn } from "../../../lib/utils";
 import { Menu, X } from "lucide-react";
 
 const menuItems = [
-    { to: "/",
-    label: "Início",
-    },
-    {
-        to: "/produtos",
-        label: "Produtos",
-    },
-    {
-        to: "/sobre",
-        label: "Sobre",
-    },
-    {
-        to: "/contato",
-        label: "Contato",
-    }
-]
+    { to: "/", label: "Início" },
+    { to: "/produtos", label: "Produtos" },
+    { to: "/sobre", label: "Sobre" },
+    { to: "/contato", label: "Contato" },
+];
 
 export const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        }
+        const handleScroll = () => setIsScrolled(window.scrollY > 10);
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     useEffect(() => {
-        if (isMenuOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
+        document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
+        return () => {
             document.body.style.overflow = "auto";
-        }
-    })
+        };
+    }, [isMenuOpen]);
+
 
     return (
         <>
-            <nav
-                className={cn(
-                    "fixed w-full top-0 left-0 z-40 transition-all duration-300",
-                    isScrolled ? "py-3 color-background/80 backdrop-blur-md shadow-md" : "py-5"
-                )}
-            >
-
-                <div className="container flex items-center justify-between">
-                    <Link
-                        to="/"
-                        className={cn("text-xl font-bold color-primary flex items-center transition-all", "duration-300 hover:opacity-80 hover:text-primary-foreground hover:text-glow")}
-                        onClick={() => setIsMenuOpen(false)}
-                    >
-                        <span className="relative z-10 text-2xl font-bold">
-                            Ecommerce Java
-                        </span>
+            <header className={cn("public-header", isScrolled && "public-header-scrolled")}>
+                <div className="container public-header-inner">
+                    <Link to="/" className="public-header-brand" onClick={() => setIsMenuOpen(false)}>
+                        Ecommerce Java
                     </Link>
 
-                    <div className="hidden md:flex space-x-8">
-                        {menuItems.map((item, key) => (
+                    <nav className="public-header-nav" aria-label="Navegação principal">
+                        {menuItems.map((item) => (
+
                             <NavLink
-                                key={key}
+                                key={item.to}
                                 to={item.to}
-                                className={cn(
-                                    "text-lg font-medium transition-all duration-300",
-                                    "hover:opacity-80 hover:text-primary-foreground hover:text-glow"
-                                )}
+                                className={({ isActive }) => cn("public-header-link", isActive && "public-header-link-active")}
                             >
                                 {item.label}
                             </NavLink>
                         ))}
-                    </div>
+                    </nav>
                 </div>
-            </nav>
+            </header >
 
             <button
                 onClick={() => setIsMenuOpen((prev) => !prev)}
-                className="md:hidden fixed top-2 right-4 z-50 p-2 rounded-md color-background/90 backdrop-blur-md shadow-md hover:opacity-80 transition-all duration-300"
+                className="public-header-mobile-toggle"
                 aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
             >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
 
-            <div
-                className={cn(
-                    "fixed inset-0 bg-background/90 backdrop-blur-md z-49 flex flex-col",
-                    "item-center justify-center transition-all duration-300 md:hidden",
-                    isMenuOpen
-                        ? "opacity-100 pointer-events-auto"
-                        : "opacity-0 pointer-events-none"
-                )}
-            >
+            <div className={cn("public-header-mobile-menu", isMenuOpen && "public-header-mobile-menu-open")}>
+                <nav className="public-header-mobile-nav" aria-label="Navegação mobile">
+                    {menuItems.map((item) => (
 
-                <div className="flex flex-col space-y-8 text-xl text-foreground w-full h-full justify-center">
-                    {menuItems.map((item, key) => (
                         <NavLink
-                            key={key}
+                            key={item.to}
                             to={item.to}
-                            className={({ isActive }) =>
-                                cn(
-                                    "text-center font-medium transition-all duration-300",
-                                    isActive
-                                        ? "text-primary-foreground underline"
-                                        : "hover:opacity-80 hover:text-primary-foreground hover:text-glow"
-                                )
-                            }
+                            className={({ isActive }) => cn("public-header-mobile-link", isActive && "public-header-mobile-link-active")}
                             onClick={() => setIsMenuOpen(false)}
                         >
                             {item.label}
                         </NavLink>
-                    ))}
-                </div>
+                    ))}[]
+                </nav>
             </div>
         </>
     );
